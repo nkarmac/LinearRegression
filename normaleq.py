@@ -1,6 +1,5 @@
 # solves normal equation to learn linear regression models
 
-import sys
 import numpy as np 
 
 

@@ -20,7 +20,9 @@ def main():
     epochs = int(input("Please specify the number of epochs: (eg \"20\")\n"))
     
     myfile = input("Please specify a data file: (eg \"data_10k_100.tsv\")\n")
+    print("opening file...")
     datafile = open(myfile)
+    print("building dataset...")
     for line in datafile:
         
         if i==0:    # number of data pts
@@ -54,20 +56,36 @@ def main():
     # add bias to x_vec
     x_vec = np.append(x_vec,bias, axis=1)
 
+    print("updating weights...")
     for epoch in range(epochs):
+        print("Epoch %i..." % (epoch+1))
         randombatch = np.split(x_vec, n)
 
-        for x in randombatch:
+        i = 0
+        for x in (randombatch):
+            yhat = np.dot(np.transpose(w_vec),x[0])
+            loss = y_vec[i] - yhat
             for j in range(d):
-                w_vec[j] = w_vec[j] + learn_rate * ((y_vec[j] - np.transpose(w_vec) @ x_vec[j]) * x[0][j])
-
-        # Build loss function
-        for x in range(n):
-            loss_vec[x] = np.square(y_vec[x] - np.transpose(w_vec) @ x_vec[x])
+                w_vec[j] = w_vec[j] + (learn_rate) * loss * x[0][j]
+            i+=1
         
-        # Sum then average loss for each iteration
-        AverageLoss = np.sum(loss_vec) / (2*n)
-        print("\nAverage Loss is: %f" % AverageLoss)
+    # ### Printing Block, uncomment for w output
+    # for x in range(d+1):
+    #     print("w%i" % (d-x), end='\t')
+    # print()
+    
+    # for x in range(d+1):
+    #     print("%f" % w_vec[x], end='\t' )
+    # ###
+
+
+    # Build loss function
+    for x in range(n):
+        loss_vec[x] = np.square(y_vec[x] - np.transpose(w_vec) @ x_vec[x])
+
+    # Sum then average loss - ***Too slow to show during iterations***
+    AverageLoss = np.sum(loss_vec) / (2*n)
+    print("Average Loss is: %f" % AverageLoss)
 
 
 if __name__ == "__main__":

@@ -14,8 +14,8 @@ def main():
     loss_vec = 0
     #inner_vec = 0
 
-    learn_rate = np.float((input("Please specify a learn rate: (eg \"0.000001\")\n")))
-    epochs = int((input("Please specify the number of epochs: (eg \"200\")\n")))
+    learn_rate = np.float(0.000001)
+    epochs = 200
     
     myfile = input("Please specify a data file: (eg \"data_10k_100.tsv\")\n")
     datafile = open(myfile)
@@ -55,8 +55,6 @@ def main():
     for i in range(epochs):
         w_vec = w_vec - (learn_rate / n) * (np.transpose(x_vec) @ x_vec @ w_vec - (np.transpose(x_vec) @ y_vec))
 
-        
-        
         ### This way also works, but is many times slower
         # for j in range(d):
         #     for x in range(n):
@@ -64,6 +62,15 @@ def main():
 
         #     w_vec[j] = w_vec[j] + (learn_rate / n) * np.sum(inner_vec)
     
+    ### Printing Block
+    for x in range(d+1):
+        print("w%i" % (d-x), end='\t')
+    print()
+    
+    for x in range(d+1):
+        print("%f" % w_vec[x], end='\t' )
+    ###
+
     # Build loss function
     for x in range(n):
         loss_vec[x] = np.square(y_vec[x] - np.transpose(w_vec) @ x_vec[x])
@@ -71,7 +78,6 @@ def main():
     # Sum then average loss for each iteration
     AverageLoss = np.sum(loss_vec) / (2*n)
     print("\nAverage Loss is: %f" % AverageLoss)
-
 
 if __name__ == "__main__":
     main()

@@ -70,8 +70,8 @@ def main():
             i+=1
         
     # ### Printing Block, uncomment for w output
-    # for x in range(d+1):
-    #     print("w%i" % (d-x), end='\t')
+    # for x in range(1, d+1):
+    #     print("w%i" % (i), end='\t')
     # print()
     
     # for x in range(d+1):

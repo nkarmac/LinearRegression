@@ -47,14 +47,14 @@ def main():
     w_vec = np.linalg.inv((np.transpose(x_vec) @ x_vec)) @ (np.transpose(x_vec) @ y_vec)
 
 
-    ### Printing Block
-    for x in range(d+1):
-        print("w%i" % (d-x), end='\t')
-    print()
+    # ### Printing Block, uncomment for w output
+    # for x in range(1, d+1):
+    #     print("w%i" % (i), end='\t')
+    # print()
     
-    for x in range(d+1):
-        print("%f" % w_vec[x], end='\t' )
-    ###
+    # for x in range(d+1):
+    #     print("%f" % w_vec[x], end='\t' )
+    # ###
     
     # Build loss function
     for x in range(n):

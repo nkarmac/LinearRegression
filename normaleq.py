@@ -31,21 +31,26 @@ def main():
         if i==2:    # skipping label lines
             i += 1
             continue
-        
-        mylist = np.fromstring(line, dtype=np.float, sep='\t')
 
+       # build vectors 
+        mylist = np.fromstring(line, dtype=np.float, sep='\t')
         y_vec[i-3] = [mylist[0]]
         x_vec[i-3] = mylist[1:]
+        
         i += 1
     
+    # add bias to x_vec
     x_vec = np.append(x_vec,bias, axis=1)
 
+    # weight vector using normal equation
     w_vec = np.linalg.inv((np.transpose(x_vec) @ x_vec)) @ (np.transpose(x_vec) @ y_vec)
 
-    print(w_vec)
-
-
-
+    for x in range(d+1):
+        print("w%i" % (d-x), end='\t')
+    print()
+    
+    for x in range(d+1):
+        print("%f" % w_vec[x], end='\t' )
 
 
 if __name__ == "__main__":

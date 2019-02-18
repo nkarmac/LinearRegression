@@ -61,8 +61,8 @@ def main():
         loss_vec[x] = np.square(y_vec[x] - np.transpose(w_vec) @ x_vec[x])
     
     # Sum then average loss
-    TotalLoss = np.sum(loss_vec) / (2*n)
-    print("\nTotal Loss is: %f" % TotalLoss)
+    AverageLoss = np.sum(loss_vec) / (2*n)
+    print("\nAverage Loss is: %f" % AverageLoss)
 
 
 if __name__ == "__main__":
